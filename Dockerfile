@@ -11,5 +11,3 @@ RUN set -xe && \
 # Command to run
 # ENTRYPOINT ["/bin/bash"]
 CMD ["/bin/bash"]
-
-VOLUME [ "/DATA" ]
