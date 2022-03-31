@@ -60,17 +60,17 @@ if [[ -n $REGISTRY_USER && -n $IMAGE_NAME ]]; then
   if [[ -n $BASH_VERSION && -n $ALPINE_VERSION ]]; then
     printf "${YELLOW}[*] ${GREEN}Generating image with bash $BASH_VERSION and alpine $ALPINE_VERSION version ${NC}\n"
     # docker build --build-arg ALPINE_VERSION=$VERSION -t alpine-bash:$VERSION .
-    docker buildx build --platform linux/amd64,linux/386,linux/arm64,linux/arm/v7,linux/arm/v6 --build-arg BASH_VERSION=$BASH_VERSION --build-arg ALPINE_VERSION=$ALPINE_VERSION -t $REGISTRY_USER/$IMAGE_NAME:$BASH_VERSION-alpine$ALPINE_VERSION --push .
+    docker buildx build --build-arg BASH_VERSION=$BASH_VERSION --build-arg ALPINE_VERSION=$ALPINE_VERSION -t $REGISTRY_USER/$IMAGE_NAME:$BASH_VERSION-alpine$ALPINE_VERSION --push .
     printf "${YELLOW}[*] ${GREEN}Finished image for bash $BASH_VERSION and alpine $ALPINE_VERSION versions ${NC}\n"
   elif [[ -n $IMAGE_VERSION ]]; then
     printf "${YELLOW}[*] ${GREEN}Generating image with bash and alpine with $IMAGE_VERSION version ${NC}\n"
     # docker build -t alpine-bash:latest .
-    docker buildx build --platform linux/amd64,linux/386,linux/arm64,linux/arm/v7,linux/arm/v6 --build-arg IMAGE_VERSION=$IMAGE_VERSION -t $REGISTRY_USER/$IMAGE_NAME:$IMAGE_VERSION --push .
+    docker buildx build --build-arg IMAGE_VERSION=$IMAGE_VERSION -t $REGISTRY_USER/$IMAGE_NAME:$IMAGE_VERSION --push .
     printf "${YELLOW}[*] ${GREEN}Finished image for bash and alpine with $IMAGE_VERSION version ${NC}\n"
   else
     printf "${YELLOW}[*] ${GREEN}Generating image for bash and alpine with latest version ${NC}\n"
     # printf "${YELLOW}[*] ${RED}Mandatory to launch also with --bash-version and --alpine-version or with --image-version ${NC}\n"
-    docker buildx build --platform linux/amd64,linux/386,linux/arm64,linux/arm/v7,linux/arm/v6 --build-arg IMAGE_VERSION=latest -t $REGISTRY_USER/$IMAGE_NAME:latest --push .
+    docker buildx build --build-arg IMAGE_VERSION=latest -t $REGISTRY_USER/$IMAGE_NAME:latest --push .
     printf "${YELLOW}[*] ${GREEN}Finished image for bash and alpine with latest version ${NC}\n"
   fi
   exit 0
