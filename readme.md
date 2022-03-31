@@ -12,24 +12,30 @@ A script and base Dockerfile to generate alpine image with bash shell
 The script contain a --help option that can describe how to use each of them.
 
 ```bash
-./generate.sh --version 3.13.4
+./generate.sh --registry-user DOCKER_USER --image-name DOCKER_IMAGE_NAME --bash-version BASH_VERSION --alpine-version ALPINE_VERSION
 ```
 
 ```bash
-./generate.sh
+./generate.sh --help
 ```
 
 ```bash
-[*] USAGE 
-[*]  	 Generate alpine image with bash 
-[*] OPTIONS 
-[*]  	 --version [string]   Set the version alpine image version to generate, optional 
-[*]  	 --help               Shows this help message 
-[*] EXAMPLES 
-[*]  	 Generate alpine image with bash shell in specified version 
-[*]  		 $ ./generate.sh --version 3.12.6 
-[*]  	 Generate alpine image with bash shell in latest version 
-[*]  		 $ ./generate.sh
+[*] USAGE
+[*]  	 Generates alpine with bash images
+[*] OPTIONS
+[*]  	 --registry-user [string]    Set the registry user mandatory
+[*]  	 --image-name [string]       Set the image name mandatory
+[*]  	 --bash-version [string]     Set the bash version optional
+[*]  	 --alpine-version [string]   Set the alpine version optional
+[*]  	 --image-version [string]    Set the image version optional
+[*]  	 --help                      Shows this help message
+[*] EXAMPLES
+[*]  	 Generate image for alpine with bash in specified version for bash and alpine
+[*]  		 $ ./generate.sh --registry-user USER --image-name IMAGE --bash-version BASH_VERSION --alpine-version ALPINE_VERSION
+[*]  	 Generate image for alpine with bash in specified image version
+[*]  		 $ ./generate.sh --registry-user USER --image-name IMAGE --image-version VERSION
+[*]  	 Generate image for alpine with bash in latest version
+[*]  		 $ ./generate.sh --registry-user USER --image-name IMAGE
 ```
 
 Powered by <a href="https://xisco.dev" target="_blank">xiscodev</a>
