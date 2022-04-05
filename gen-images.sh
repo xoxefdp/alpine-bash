@@ -17,17 +17,18 @@ printHelp() {
   printf "${NC}[*] ${GREEN}OPTIONS ${NC}\n"
   printf "${NC}[*] ${YELLOW} \t --registry-user [string]    ${NC}Set the registry user ${RED}mandatory ${NC}\n"
   printf "${NC}[*] ${YELLOW} \t --image-name [string]       ${NC}Set the image name ${RED}mandatory ${NC}\n"
+  printf "${NC}[*] ${YELLOW} \t --platforms-list [string]   ${NC}Set the platforms to build ${RED}mandatory ${NC}\n"
   printf "${NC}[*] ${YELLOW} \t --bash-version [string]     ${NC}Set the bash version ${YELLOW}optional${NC}\n"
   printf "${NC}[*] ${YELLOW} \t --alpine-version [string]   ${NC}Set the alpine version ${YELLOW}optional${NC}\n"
   printf "${NC}[*] ${YELLOW} \t --image-version [string]    ${NC}Set the image version ${YELLOW}optional${NC}\n"
   printf "${NC}[*] ${YELLOW} \t --help                      ${NC}Shows this help message ${NC}\n"
   printf "${NC}[*] ${GREEN}EXAMPLES ${NC}\n"
   printf "${NC}[*] ${NC} \t Generate image for alpine with bash in specified version for bash and alpine \n"
-  printf "${NC}[*] ${YELLOW} \t\t $ ./gen-images.sh --registry-user USER --image-name IMAGE --bash-version BASH_VERSION --alpine-version ALPINE_VERSION \n"
+  printf "${NC}[*] ${YELLOW} \t\t $ ./gen-images.sh --registry-user USER --image-name IMAGE --platforms-list pc --bash-version BASH_VERSION --alpine-version ALPINE_VERSION \n"
   printf "${NC}[*] ${NC} \t Generate image for alpine with bash in specified image version \n"
-  printf "${NC}[*] ${YELLOW} \t\t $ ./gen-images.sh --registry-user USER --image-name IMAGE --image-version VERSION \n"
+  printf "${NC}[*] ${YELLOW} \t\t $ ./gen-images.sh --registry-user USER --image-name IMAGE --platforms-list arm --image-version VERSION \n"
   printf "${NC}[*] ${NC} \t Generate image for alpine with bash in latest version \n"
-  printf "${NC}[*] ${YELLOW} \t\t $ ./gen-images.sh --registry-user USER --image-name IMAGE \n"
+  printf "${NC}[*] ${YELLOW} \t\t $ ./gen-images.sh --registry-user USER --image-name IMAGE --platforms-list full \n"
 }
 
 while [[ $# -gt 0 ]]
@@ -76,6 +77,7 @@ if [[ -n $REGISTRY_USER && -n $IMAGE_NAME && -n $PLATFORMS_LIST ]]; then
     PLATFORMS=$FULL
   else
     printf "${YELLOW}[*] ${RED}Param --platforms-list should be 'pc', 'arm' or 'full' ${NC}\n"
+    printHelp
     exit 1
   fi
 
@@ -98,5 +100,6 @@ if [[ -n $REGISTRY_USER && -n $IMAGE_NAME && -n $PLATFORMS_LIST ]]; then
   exit 0
 else
   printf "${YELLOW}[*] ${RED}Mandatory to launch with --registry-user, --image-name and --builder ${NC}\n"
+  printHelp
   exit 1
 fi
